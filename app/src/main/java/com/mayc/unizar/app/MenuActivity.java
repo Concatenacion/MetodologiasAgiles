@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.mayc.unizar.app.fragments.CardFragment;
 import com.mayc.unizar.app.fragments.DefaultFragment;
 
 public class MenuActivity extends AppCompatActivity
@@ -67,7 +68,7 @@ public class MenuActivity extends AppCompatActivity
         Bundle b = new Bundle();
         switch (item.getItemId()){
             case R.id.nav_play:
-                b.putString(DefaultFragment.ARG_LAYOUT,"Play");
+                f = new CardFragment();
                 break;
             case R.id.nav_manage:
                 b.putString(DefaultFragment.ARG_LAYOUT,"Manage");
