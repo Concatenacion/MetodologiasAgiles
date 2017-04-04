@@ -16,7 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.mayc.unizar.app.fragments.CardFragment;
 import com.mayc.unizar.app.fragments.DefaultFragment;
+import com.mayc.unizar.app.fragments.WebFragment;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -67,13 +69,13 @@ public class MenuActivity extends AppCompatActivity
         Bundle b = new Bundle();
         switch (item.getItemId()){
             case R.id.nav_play:
-                b.putString(DefaultFragment.ARG_LAYOUT,"Play");
+                f = new CardFragment();
                 break;
             case R.id.nav_manage:
                 b.putString(DefaultFragment.ARG_LAYOUT,"Manage");
                 break;
             case R.id.nav_download:
-                b.putString(DefaultFragment.ARG_LAYOUT,"Download");
+                f = new WebFragment();
                 break;
             case R.id.nav_send:
                 b.putString(DefaultFragment.ARG_LAYOUT,"Send");
