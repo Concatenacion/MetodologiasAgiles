@@ -37,6 +37,20 @@ public class Item {
     @Expose
     private String description;
 
+    public Item(int id, String name, String imageUrl, String description,  String option1, int nextOption1, String option2, int nextOption2){
+        this.name = name;
+        this.imageUrl = imageUrl;
+        this.id=id;
+        this.option1=option1;
+        this.nextOption1=nextOption1;
+        this.option2=option2;
+        this.nextOption2=nextOption2;
+        this.description=description;
+    }
+    public Item(int id){
+        this.id=id;
+    }
+
     public String getName() {
         return name;
     }
