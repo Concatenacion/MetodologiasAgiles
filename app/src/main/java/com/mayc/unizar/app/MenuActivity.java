@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.mayc.unizar.app.fragments.CardFragment;
 import com.mayc.unizar.app.fragments.DefaultFragment;
+import com.mayc.unizar.app.fragments.ManageStoriesFragment;
 import com.mayc.unizar.app.fragments.WebFragment;
 
 public class MenuActivity extends AppCompatActivity
@@ -72,7 +73,8 @@ public class MenuActivity extends AppCompatActivity
                 f = new CardFragment();
                 break;
             case R.id.nav_manage:
-                b.putString(DefaultFragment.ARG_LAYOUT,"Manage");
+                //b.putString(DefaultFragment.ARG_LAYOUT,"Manage");
+                f = new ManageStoriesFragment();
                 break;
             case R.id.nav_download:
                 f = new WebFragment();

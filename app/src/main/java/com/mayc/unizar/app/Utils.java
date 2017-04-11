@@ -35,6 +35,27 @@ public class Utils {
         }
     }
 
+
+    /*
+     *  Parser para obtener las historias almacenadas
+     */
+    public static List<HistoryInfo> loadInfiniteFeeds(Context context){
+        try{
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.create();
+            JSONArray array = new JSONArray(loadJSONFromAsset(context, "histories.json"));
+            List<HistoryInfo> feedList = new ArrayList<>();
+            for(int i=0;i<array.length();i++){
+                HistoryInfo feed = gson.fromJson(array.getString(i), HistoryInfo.class);
+                feedList.add(feed);
+            }
+            return feedList;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     private static String loadJSONFromAsset(Context context, String jsonFileName) {
         String json = null;
         InputStream is=null;
