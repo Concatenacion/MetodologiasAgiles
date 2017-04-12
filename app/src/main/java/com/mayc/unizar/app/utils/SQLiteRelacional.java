@@ -36,7 +36,7 @@ public class SQLiteRelacional {
                     + UltimaTarjeta + " INTEGER , "
                     + Genero + " TEXT , "
                     + Cuerpo + " TEXT NOT NULL ,"
-                    + " FOREIGN KEY("+UltimaTarjeta+") REFERENCES "+DATABASE_TABLE_TARJETAS+"("+KEY_IDINFO+");";
+                    + " FOREIGN KEY("+UltimaTarjeta+") REFERENCES "+DATABASE_TABLE_TARJETAS+"("+KEY_IDINFO+"));";
 
     protected static final String DATABASE_CREATE_TARJETAS=
             "create table " + DATABASE_TABLE_TARJETAS+ " ("
@@ -44,14 +44,14 @@ public class SQLiteRelacional {
             + Nombre +" TEXT NOT NULL , "
             + Foto + " TEXT , "
             + Cuerpo + " TEXT NOT NULL , "
-            + Derecha + "INTEGER NOT NULL , "
-            + OpcionDerecha + "TEXT NOT NULL , "
-            + Izquierda + "INTEGER NOT NULL , "
-            + OpcionIzquierda + "TEXT NOT NULL , "
+            + Derecha + " INTEGER NOT NULL , "
+            + OpcionDerecha + " TEXT NOT NULL , "
+            + Izquierda + " INTEGER NOT NULL , "
+            + OpcionIzquierda + " TEXT NOT NULL , "
             + HISTORIA + " INTEGER NOT NULL , "
             + " FOREIGN KEY ("+Derecha+") REFERENCES "+DATABASE_TABLE_TARJETAS+"("+KEY_IDINFO+") , "
             + " FOREIGN KEY ("+Izquierda+") REFERENCES "+DATABASE_TABLE_TARJETAS+"("+KEY_IDINFO+") , "
-            + " FOREIGN KEY ("+HISTORIA+") REFERENCES "+DATABASE_CREATE_HISTORIAS+"("+KEY_IDINFO+")"
+            + " FOREIGN KEY ("+HISTORIA+") REFERENCES "+DATABASE_TABLE_HISTORIAS+"("+KEY_IDINFO+")"
             + " PRIMARY KEY ("+HISTORIA+ ", " + KEY_IDINFO +"));";
 
 
