@@ -8,6 +8,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.UrlQuerySanitizer;
 import android.util.Log;
 import com.mayc.unizar.app.utils.SQLiteRelacional;
 
@@ -96,18 +97,24 @@ public class DbAdapter extends SQLiteRelacional {
     public long countHistories(){
         if(!mDb.isOpen())
             open();
-        String[] a = {"count(*)"};
         return DatabaseUtils.queryNumEntries(mDb,DATABASE_TABLE_HISTORIAS);
     }
 
+    public long countCards(){
+        if(!mDb.isOpen())
+            open();
+        return DatabaseUtils.queryNumEntries(mDb,DATABASE_TABLE_TARJETAS);
+    }
 
-    public long insertTarjeta(int id, String Nombre, String Foto, String cuerpo, int derecha, String opcionD,  int izquierda, String opcionI, int historia) {
+
+
+    public long insertTarjeta(int id, String nombre, String foto, String cuerpo, int derecha, String opcionD,  int izquierda, String opcionI, int historia) {
         if(!mDb.isOpen())
             open();
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_IDINFO, id);
-        initialValues.put(Nombre, Nombre);
-        initialValues.put(Foto, Foto);
+        initialValues.put(Nombre, nombre);
+        initialValues.put(Foto, new UrlQuerySanitizer().getValue(foto));
         initialValues.put(Cuerpo, cuerpo);
         initialValues.put(Derecha, derecha);
         initialValues.put(OpcionDerecha, opcionD);
@@ -115,7 +122,7 @@ public class DbAdapter extends SQLiteRelacional {
         initialValues.put(OpcionIzquierda, opcionI);
         initialValues.put(HISTORIA,historia);
         try {
-            return mDb.insertOrThrow(DATABASE_TABLE_HISTORIAS, null, initialValues);
+            return mDb.insertOrThrow(DATABASE_TABLE_TARJETAS, null, initialValues);
         } catch (SQLiteConstraintException e) {
             Log.w(TAG, "insertTarjeta: "+e.getMessage());
             return 0;
@@ -130,14 +137,14 @@ public class DbAdapter extends SQLiteRelacional {
     public Cursor returnAllFromHistoria(int id) {
         if(!mDb.isOpen())
             open();
-        return mDb.query(DATABASE_TABLE_TARJETAS, null,HISTORIA+ "=" + id,null,null,null,null);
+        return mDb.query(DATABASE_TABLE_TARJETAS, new String[]{"*"},HISTORIA+" = ?",new String[]{""+id},null,null,null);
     }
 
 
     public Cursor returnTarjeta(int historia, int id){
         if(!mDb.isOpen())
             open();
-        return mDb.query(DATABASE_TABLE_TARJETAS, null,HISTORIA+ "=" + historia + " AND " + KEY_IDINFO + "=" + id,null,null,null,null);
+        return mDb.query(DATABASE_TABLE_TARJETAS, new String[]{"*"},HISTORIA+ " = ?" +" AND " + KEY_IDINFO + " = ?",new String[]{""+historia,""+id},null,null,null);
     }
 
     public void updateLastCard(int Historia, int id){
