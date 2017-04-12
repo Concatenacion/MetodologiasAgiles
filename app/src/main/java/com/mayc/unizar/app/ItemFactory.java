@@ -4,6 +4,7 @@ package com.mayc.unizar.app;
 import android.database.Cursor;
 
 import com.mayc.unizar.app.adapters.DbAdapter;
+import com.mayc.unizar.app.types.Item;
 
 /**
  * Created by pfort on 06/04/2017.

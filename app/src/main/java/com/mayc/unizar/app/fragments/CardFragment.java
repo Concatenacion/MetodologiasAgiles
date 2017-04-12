@@ -1,19 +1,14 @@
 package com.mayc.unizar.app.fragments;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.TextView;
 
 import com.mayc.unizar.app.Card;
-import com.mayc.unizar.app.Item;
+import com.mayc.unizar.app.types.Item;
 import com.mayc.unizar.app.R;
 import com.mayc.unizar.app.Utils;
 import com.mindorks.placeholderview.SwipeDecor;

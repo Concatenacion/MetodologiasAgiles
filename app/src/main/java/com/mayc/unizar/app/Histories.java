@@ -1,14 +1,16 @@
 package com.mayc.unizar.app;
 
 
-import com.mindorks.placeholderview.annotations.Layout;
-import com.mindorks.placeholderview.annotations.View;
-import com.mindorks.placeholderview.InfinitePlaceHolderView;
-import com.mindorks.placeholderview.annotations.infinite.LoadMore;
-import java.util.List;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+
+import com.mayc.unizar.app.types.HistoryInfo;
+import com.mindorks.placeholderview.InfinitePlaceHolderView;
+import com.mindorks.placeholderview.annotations.Layout;
+import com.mindorks.placeholderview.annotations.infinite.LoadMore;
+
+import java.util.List;
 
 @Layout(R.layout.histories_view)
 public class Histories {
@@ -24,12 +26,12 @@ public class Histories {
     }
 
     @LoadMore
-    private void onLoadMore(){
+    private void onLoadMore() {
         Log.d("DEBUG", "onLoadMore");
         new ForcedWaitedLoading();
     }
 
-    class ForcedWaitedLoading implements Runnable{
+    class ForcedWaitedLoading implements Runnable {
 
         public ForcedWaitedLoading() {
             new Thread(this).start();
@@ -40,7 +42,7 @@ public class Histories {
 
             try {
                 Thread.currentThread().sleep(2000);
-            }catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             new Handler(Looper.getMainLooper()).post(new Runnable() {
@@ -53,7 +55,7 @@ public class Histories {
                          i++) {
                         mLoadMoreView.addView(new History(mLoadMoreView.getContext(), mFeedList.get(i)));
 
-                        if(i == mFeedList.size() - 1){
+                        if (i == mFeedList.size() - 1) {
                             mLoadMoreView.noMoreToLoad();
                             break;
                         }

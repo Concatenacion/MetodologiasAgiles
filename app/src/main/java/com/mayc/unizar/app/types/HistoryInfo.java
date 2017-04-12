@@ -1,4 +1,4 @@
-package com.mayc.unizar.app;
+package com.mayc.unizar.app.types;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mayc.unizar.app.types.HistoryInfo;
+import com.mayc.unizar.app.types.Item;
 
 import org.json.JSONArray;
 

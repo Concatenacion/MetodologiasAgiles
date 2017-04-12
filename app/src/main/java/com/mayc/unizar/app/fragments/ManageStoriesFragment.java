@@ -6,11 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.mayc.unizar.app.Histories;
 import com.mayc.unizar.app.History;
-import com.mayc.unizar.app.HistoryInfo;
+import com.mayc.unizar.app.types.HistoryInfo;
 import com.mayc.unizar.app.R;
 import com.mayc.unizar.app.Utils;
 import com.mindorks.placeholderview.InfinitePlaceHolderView;
