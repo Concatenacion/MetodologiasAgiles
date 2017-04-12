@@ -102,6 +102,8 @@ public class DbAdapter extends SQLiteRelacional {
 
 
     public long insertTarjeta(int id, String Nombre, String Foto, String cuerpo, int derecha, String opcionD,  int izquierda, String opcionI, int historia) {
+        if(!mDb.isOpen())
+            open();
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_IDINFO, id);
         initialValues.put(Nombre, Nombre);
@@ -120,19 +122,27 @@ public class DbAdapter extends SQLiteRelacional {
         }
     }
     public Cursor returnAllHistorias() {
+        if(!mDb.isOpen())
+            open();
         return mDb.query(DATABASE_TABLE_HISTORIAS, null,null,null,null,null,null);
     }
 
     public Cursor returnAllFromHistoria(int id) {
+        if(!mDb.isOpen())
+            open();
         return mDb.query(DATABASE_TABLE_TARJETAS, null,HISTORIA+ "=" + id,null,null,null,null);
     }
 
 
     public Cursor returnTarjeta(int historia, int id){
+        if(!mDb.isOpen())
+            open();
         return mDb.query(DATABASE_TABLE_TARJETAS, null,HISTORIA+ "=" + historia + " AND " + KEY_IDINFO + "=" + id,null,null,null,null);
     }
 
     public void updateLastCard(int Historia, int id){
+        if(!mDb.isOpen())
+            open();
         mDb.execSQL("UPDATE "+DATABASE_TABLE_HISTORIAS+" SET "+UltimaTarjeta+"="+id+" WHERE "+KEY_IDINFO+"="+Historia);
     }
 }
