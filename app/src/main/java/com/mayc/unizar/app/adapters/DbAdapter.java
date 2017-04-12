@@ -3,6 +3,7 @@ package com.mayc.unizar.app.adapters;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
@@ -27,6 +28,7 @@ public class DbAdapter extends SQLiteRelacional {
      */
     public DbAdapter(Context ctx) {
         this.mCtx = ctx;
+        open();
     }
 
     /**
@@ -77,6 +79,8 @@ public class DbAdapter extends SQLiteRelacional {
 
 
     public long insertHistoria(int id, String titulo, String genero, String cuerpo) {
+        if(!mDb.isOpen())
+           open();
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_IDINFO, id);
         initialValues.put(Titulo, titulo);
@@ -85,8 +89,15 @@ public class DbAdapter extends SQLiteRelacional {
         try {
             return mDb.insertOrThrow(DATABASE_TABLE_HISTORIAS, null, initialValues);
         } catch (SQLiteConstraintException e) {
+            Log.w(TAG, "insertHistoria: "+e.getMessage() );
             return 0;
         }
+    }
+    public long countHistories(){
+        if(!mDb.isOpen())
+            open();
+        String[] a = {"count(*)"};
+        return DatabaseUtils.queryNumEntries(mDb,DATABASE_TABLE_HISTORIAS);
     }
 
 
@@ -104,6 +115,7 @@ public class DbAdapter extends SQLiteRelacional {
         try {
             return mDb.insertOrThrow(DATABASE_TABLE_HISTORIAS, null, initialValues);
         } catch (SQLiteConstraintException e) {
+            Log.w(TAG, "insertTarjeta: "+e.getMessage());
             return 0;
         }
     }
