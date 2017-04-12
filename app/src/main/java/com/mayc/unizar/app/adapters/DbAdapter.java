@@ -12,6 +12,7 @@ import android.net.UrlQuerySanitizer;
 import android.util.Log;
 import com.mayc.unizar.app.utils.SQLiteRelacional;
 
+import java.net.URL;
 
 
 public class DbAdapter extends SQLiteRelacional {
@@ -111,10 +112,11 @@ public class DbAdapter extends SQLiteRelacional {
     public long insertTarjeta(int id, String nombre, String foto, String cuerpo, int derecha, String opcionD,  int izquierda, String opcionI, int historia) {
         if(!mDb.isOpen())
             open();
+       //TODO FIX URL ESCAPE
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_IDINFO, id);
         initialValues.put(Nombre, nombre);
-        initialValues.put(Foto, new UrlQuerySanitizer().getValue(foto));
+        initialValues.put(Foto,"'"+foto+"'");
         initialValues.put(Cuerpo, cuerpo);
         initialValues.put(Derecha, derecha);
         initialValues.put(OpcionDerecha, opcionD);

@@ -1,5 +1,7 @@
 package com.mayc.unizar.app.types;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -39,7 +41,7 @@ public class Item {
 
     public Item(int id, String name, String imageUrl, String description,  String option1, int nextOption1, String option2, int nextOption2){
         this.name = name;
-        this.imageUrl = imageUrl;
+        this.imageUrl = imageUrl.substring(1,imageUrl.length()-1);
         this.id=id;
         this.option1=option1;
         this.nextOption1=nextOption1;
@@ -64,7 +66,7 @@ public class Item {
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.imageUrl = imageUrl.substring(1,imageUrl.length()-1);
     }
 
     public Integer getId() {
