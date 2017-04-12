@@ -1,10 +1,11 @@
-package com.mayc.unizar.app;
+package com.mayc.unizar.app.views;
 
 
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import com.mayc.unizar.app.R;
 import com.mayc.unizar.app.types.HistoryInfo;
 import com.mindorks.placeholderview.InfinitePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;

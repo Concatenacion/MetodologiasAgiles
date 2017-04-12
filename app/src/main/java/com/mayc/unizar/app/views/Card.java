@@ -1,4 +1,4 @@
-package com.mayc.unizar.app;
+package com.mayc.unizar.app.views;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.mayc.unizar.app.R;
 import com.mayc.unizar.app.types.Item;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;

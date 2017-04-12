@@ -1,4 +1,4 @@
-package com.mayc.unizar.app;
+package com.mayc.unizar.app.factories;
 
 
 import android.database.Cursor;

@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mayc.unizar.app.Histories;
-import com.mayc.unizar.app.History;
+import com.mayc.unizar.app.utils.JsonUtils;
+import com.mayc.unizar.app.views.Histories;
+import com.mayc.unizar.app.views.History;
 import com.mayc.unizar.app.types.HistoryInfo;
 import com.mayc.unizar.app.R;
-import com.mayc.unizar.app.Utils;
 import com.mindorks.placeholderview.InfinitePlaceHolderView;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class ManageStoriesFragment extends Fragment {
         /*
          * Carga de los elementos del list view
          */
-        List<HistoryInfo> feedList = Utils.loadInfiniteFeeds(getActivity().getApplicationContext());
+        List<HistoryInfo> feedList = JsonUtils.loadInfiniteFeeds(getActivity().getApplicationContext());
         Log.d("DEBUG", "LoadMoreView.LOAD_VIEW_SET_COUNT " + Histories.LOAD_VIEW_SET_COUNT);
         for(int i = 0; i < Histories.LOAD_VIEW_SET_COUNT; i++){
             mLoadMoreView.addView(new History(getActivity().getApplicationContext(), feedList.get(i)));

@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mayc.unizar.app.Card;
+import com.mayc.unizar.app.utils.JsonUtils;
+import com.mayc.unizar.app.views.Card;
 import com.mayc.unizar.app.types.Item;
 import com.mayc.unizar.app.R;
-import com.mayc.unizar.app.Utils;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
@@ -46,7 +46,7 @@ public class CardFragment extends Fragment {
 
 
 
-        for(Item item : Utils.loadProfiles(view.getContext())){
+        for(Item item : JsonUtils.loadProfiles(view.getContext())){
             mSwipeView.addView(new Card(mContext, item, mSwipeView));
         }
 

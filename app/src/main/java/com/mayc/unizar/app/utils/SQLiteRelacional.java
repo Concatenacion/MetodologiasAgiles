@@ -1,4 +1,4 @@
-package com.mayc.unizar.app;
+package com.mayc.unizar.app.utils;
 
 public class SQLiteRelacional {
 

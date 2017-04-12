@@ -1,4 +1,4 @@
-package com.mayc.unizar.app;
+package com.mayc.unizar.app.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -16,9 +16,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Utils {
+public class JsonUtils {
 
-    private static final String TAG = "Utils";
+    private static final String TAG = "JsonUtils";
 
     public static List<Item> loadProfiles(Context context){
         try{
