@@ -1,5 +1,9 @@
 [
   {
+    "title":"A Demo Story",
+    "genre": "Narative"
+  },
+  {
     "url":"http://alosound.com/wp-content/uploads/edd/2016/12/Dungeon-Level-360x203.png",
     "name":"Dungeon",
     "id":1,
