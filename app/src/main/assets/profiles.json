@@ -39,10 +39,20 @@
     "name":"Cave",
     "id":4,
     "option1": "Go forward",
-    "nextOption1":1,
+    "nextOption1":5,
     "option2": "Go backwards",
     "nextOption2":2,
     "description":"You are lost in a dark cave"
 
+  },
+  {
+    "url":"https://cdn.shutterstock.com/shutterstock/videos/22752961/thumb/7.jpg?i10c=img.resize(height:160)",
+    "name":"Game Over",
+    "id":5,
+    "option1":"",
+    "nextOption1":5,
+    "option2": "",
+    "nextOption2":5,
+    "description":"You win the demo story"
   }
 ]
