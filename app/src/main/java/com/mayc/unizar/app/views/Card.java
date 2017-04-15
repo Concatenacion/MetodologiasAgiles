@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mayc.unizar.app.R;
 import com.mayc.unizar.app.types.Item;
+import com.mayc.unizar.app.utils.GameEngine;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
@@ -45,11 +46,13 @@ public class Card {
     private Item mItem;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
+    private GameEngine engine;
 
-    public Card(Context context, Item item, SwipePlaceHolderView swipeView) {
+    public Card(Context context, Item item, SwipePlaceHolderView swipeView,GameEngine engine) {
         mContext = context;
         mItem = item;
         mSwipeView = swipeView;
+        this.engine=engine;
 
     }
 
@@ -80,7 +83,8 @@ public class Card {
     @SwipeOut
     private void onSwipedOut() {
         Log.d("EVENT", "onSwipedOut");
-        mSwipeView.addView(this);
+        Log.d("CARD", "onSwipedOut: selected right, next card:"+ mItem.getNextOption1());
+        engine.selectRigthOption();
     }
 
     @SwipeCancelState
@@ -91,7 +95,7 @@ public class Card {
     @SwipeIn
     private void onSwipeIn() {
         Log.d("EVENT", "onSwipedIn");
-        mSwipeView.addView(this);
+        engine.selectLeftOption();
     }
 
     @SwipeInState

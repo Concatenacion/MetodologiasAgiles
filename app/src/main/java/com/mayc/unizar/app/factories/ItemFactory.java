@@ -5,7 +5,17 @@ import android.database.Cursor;
 import android.util.Log;
 
 import com.mayc.unizar.app.adapters.DbAdapter;
+import com.mayc.unizar.app.utils.SQLiteRelacional;
 import com.mayc.unizar.app.types.Item;
+
+import static com.mayc.unizar.app.utils.SQLiteRelacional.Cuerpo;
+import static com.mayc.unizar.app.utils.SQLiteRelacional.Derecha;
+import static com.mayc.unizar.app.utils.SQLiteRelacional.Foto;
+import static com.mayc.unizar.app.utils.SQLiteRelacional.Izquierda;
+import static com.mayc.unizar.app.utils.SQLiteRelacional.KEY_IDINFO;
+import static com.mayc.unizar.app.utils.SQLiteRelacional.Nombre;
+import static com.mayc.unizar.app.utils.SQLiteRelacional.OpcionDerecha;
+import static com.mayc.unizar.app.utils.SQLiteRelacional.OpcionIzquierda;
 
 /**
  * Created by pfort on 06/04/2017.
@@ -21,12 +31,13 @@ public class ItemFactory {
 
 
     public Item getCard(int id, int historia){
+        Log.d(TAG, "getCard: Trying to read card:"+id+" from story:"+historia);
        Cursor cur = db.returnTarjeta(historia, id);
         if (cur!=null && cur.moveToFirst()){
             Log.d(TAG, "getCard: Generating card");
-            return new Item(cur.getInt(0), cur.getString(1), cur.getString(2), cur.getString(3), cur.getString(4), cur.getInt(5), cur.getString(6), cur.getInt(7));
+            return new Item(cur.getInt(cur.getColumnIndex(KEY_IDINFO)), cur.getString(cur.getColumnIndex(Nombre)), cur.getString(cur.getColumnIndex(Foto)), cur.getString(cur.getColumnIndex(Cuerpo)), cur.getString(cur.getColumnIndex(OpcionIzquierda)), cur.getInt(cur.getColumnIndex(Izquierda)), cur.getString(cur.getColumnIndex(OpcionDerecha)), cur.getInt(cur.getColumnIndex(Derecha)));
         }
-        Log.d(TAG, "getCard: Returning null");
+        Log.w(TAG, "getCard: Returning null");
         return new Item(-1);
    }
 

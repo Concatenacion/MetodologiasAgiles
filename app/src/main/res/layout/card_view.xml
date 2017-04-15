@@ -73,12 +73,12 @@
                         android:src="@drawable/ic_keyboard_arrow_left" />
 
                     <TextView
-                        android:id="@+id/option1"
+                        android:id="@+id/option2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                        android:text="bbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
                         android:textColor="@color/colorPrimary" />
-                </LinearLayout> <!-- End of Action 1 container-->
+                </LinearLayout> <!--End Action 1 container-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -93,12 +93,14 @@
                         android:src="@drawable/ic_keyboard_arrow_right" />
 
                     <TextView
-                        android:id="@+id/option2"
+                        android:id="@+id/option1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="bbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+                        android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
                         android:textColor="@color/colorPrimary" />
-                </LinearLayout> <!--End Action 2 container-->
+                </LinearLayout> <!-- End of Action 2 container-->
+
+
             </LinearLayout> <!-- End of Actions container -->
 
         <ImageView

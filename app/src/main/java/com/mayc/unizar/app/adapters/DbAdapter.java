@@ -109,7 +109,7 @@ public class DbAdapter extends SQLiteRelacional {
 
 
 
-    public long insertTarjeta(int id, String nombre, String foto, String cuerpo, int derecha, String opcionD,  int izquierda, String opcionI, int historia) {
+    public long insertTarjeta(int id, String nombre, String foto, String cuerpo, int izquierda, String opcionI,int derecha, String opcionD, int historia) {
         if(!mDb.isOpen())
             open();
        //TODO FIX URL ESCAPE
