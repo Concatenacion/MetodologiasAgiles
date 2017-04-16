@@ -20,6 +20,10 @@ public class HistoryInfo {
     @Expose
     private String caption;
 
+    @SerializedName("Body")
+    @Expose
+    private String body;
+
     @SerializedName("time")
     @Expose
     private String time;
@@ -55,4 +59,8 @@ public class HistoryInfo {
     public void setTime(String time) {
         this.time = time;
     }
+
+    public String getBody() { return body; }
+
+    public void setBody(String body) { this.body = body; }
 }

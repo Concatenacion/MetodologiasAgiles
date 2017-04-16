@@ -11,6 +11,8 @@ public class SQLiteRelacional {
     public static final String Titulo="Titulo"; //Titulo de una historia
     public static final String Genero="Genero";   //Género de una historia.
     public static final String UltimaTarjeta="UltimaTarjeta";
+    public static final String Tiempo = "Tiempo";
+
 
     public static final String Nombre="Nombre"; //Nombre de una tarjeta
     public static final String Foto = "Foto";     //Foto incluida en una tarjeta
@@ -22,9 +24,6 @@ public class SQLiteRelacional {
     public static final String Izquierda="Izquierda";
 
 
-
-
-
     public static final int DATABASE_VERSION = 1;
 
 
@@ -34,6 +33,8 @@ public class SQLiteRelacional {
                     + KEY_IDINFO + " INTEGER PRIMARY KEY , "
                     + Titulo +" TEXT NOT NULL , "
                     + UltimaTarjeta + " INTEGER , "
+                    + Foto + "TEXT , "
+                    + Tiempo + "TEXT ,"
                     + Genero + " TEXT , "
                     + Cuerpo + " TEXT NOT NULL ,"
                     + " FOREIGN KEY("+UltimaTarjeta+") REFERENCES "+DATABASE_TABLE_TARJETAS+"("+KEY_IDINFO+"));";

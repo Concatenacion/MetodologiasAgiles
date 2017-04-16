@@ -136,10 +136,16 @@ public class DbAdapter extends SQLiteRelacional {
         return mDb.query(DATABASE_TABLE_HISTORIAS, null,null,null,null,null,null);
     }
 
+    public Cursor getHistory(int id) {
+        if(!mDb.isOpen())
+            open();
+        return mDb.query(DATABASE_TABLE_TARJETAS, new String[]{"*"},HISTORIA+" = ?", new String[]{""+id},null,null,null,null);
+    }
+
     public Cursor returnAllFromHistoria(int id) {
         if(!mDb.isOpen())
             open();
-        return mDb.query(DATABASE_TABLE_TARJETAS, new String[]{"*"},HISTORIA+" = ?",new String[]{""+id},null,null,null);
+        return mDb.query(DATABASE_TABLE_TARJETAS, new String[]{"*"},HISTORIA+" = ?", new String[]{""+id},null,null,null);
     }
 
 
