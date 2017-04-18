@@ -5,8 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mayc.unizar.app.R;
 
@@ -19,7 +22,7 @@ public class WebFragment extends Fragment {
      * sección
      */
     public static final String ARG_LAYOUT = "Layout";
-
+    private static final String URL = "http://www.guillermocebollero.es/app/";
     public WebFragment() {
     }
 
@@ -28,9 +31,21 @@ public class WebFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.web_layout, container, false);
         WebView web = (WebView) view.findViewById(R.id.webview);
-        web.loadUrl("https://github.com/Concatenacion/MetodologiasAgiles");
-        TextView url = (TextView) view.findViewById(R.id.url);
-        url.setText("https://github.com/Concatenacion/MetodologiasAgiles");
+        web.loadUrl(URL);
+        web.setWebViewClient(new WebViewClient()
+        {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            {
+                if(url.endsWith(".json")) {
+                    Toast.makeText(view.getContext(), "OK", Toast.LENGTH_SHORT).show();
+                }else if(!url.equals(URL)){
+                    Toast.makeText(view.getContext(), "It seems to not be a valid story link.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(),url,Toast.LENGTH_LONG).show();
+                }
+                return true;
+            }
+        });
         return view;
     }
 
