@@ -52,10 +52,30 @@ public class JsonUtils {
             mDb.insertHistoria((int)mDb.countHistories()+1,h.getTitle(),"none","body");
             for(Item i : cards)
                 mDb.insertTarjeta(i.getId(),i.getName(),i.getImageUrl(),i.getDescription(),i.getNextOption1(),i.getOption1(),i.getNextOption2(),i.getOption2(),(int)mDb.countHistories());
-           }catch (JSONException jsone){
+        }catch (JSONException jsone){
             Log.e(TAG,"Error accessing :"+path);
         }
     }
+
+    public static void writeToDB(Context ctx,String json){
+        try {
+            Gson gson = new GsonBuilder().create();
+            JSONArray history = new JSONArray(json);
+            HistoryInfo h = gson.fromJson(history.getString(0),HistoryInfo.class);
+            List<Item> cards = new ArrayList<>();
+            for(int i = 1; i< history.length();i++)
+                cards.add(gson.fromJson(history.getString(i),Item.class));
+            DbAdapter mDb = new DbAdapter(ctx);
+            //TODO fix insert
+            mDb.insertHistoria((int)mDb.countHistories()+1,h.getTitle(),"none","body");
+            for(Item i : cards)
+                mDb.insertTarjeta(i.getId(),i.getName(),i.getImageUrl(),i.getDescription(),i.getNextOption1(),i.getOption1(),i.getNextOption2(),i.getOption2(),(int)mDb.countHistories());
+        }catch (JSONException jsone){
+            Log.e(TAG,"Error: "+jsone.getMessage());
+        }
+    }
+
+
 
 
 
