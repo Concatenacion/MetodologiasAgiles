@@ -28,10 +28,13 @@ public class CardFragment extends Fragment {
      * sección
      */
     public static final String ARG_LAYOUT = "Layout";
+    public static final String ARG_STORY_ID = "Story";
     private static final String TAG = "CardFragment";
     private SwipePlaceHolderView mSwipeView;
     private ItemFactory factory;
     private Context mContext;
+
+    private int storyID;
 
     public CardFragment() {
     }
@@ -40,6 +43,8 @@ public class CardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.cards_fragment_layout, container, false);
+        //get story id
+        this.storyID=getArguments().getInt(ARG_STORY_ID,1);
         mSwipeView = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
         mContext = view.getContext();
         DbAdapter mDb = new DbAdapter(view.getContext());
@@ -57,7 +62,7 @@ public class CardFragment extends Fragment {
                         .setSwipeInMsgLayoutId(R.layout.card_msg_green_view)
                         .setSwipeOutMsgLayoutId(R.layout.card_msg_red_view));
         factory = new ItemFactory(mDb);
-        GameEngine engine = new GameEngine(mDb,view.getContext(),mSwipeView,1);
+        GameEngine engine = new GameEngine(mDb,view.getContext(),mSwipeView,this.storyID);
         //mSwipeView.addView(new Card(view.getContext(),factory.getCard(1,1),mSwipeView));
 /*
         for(Item item : JsonUtils.loadProfiles(view.getContext())){

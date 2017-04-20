@@ -24,7 +24,8 @@ import com.mayc.unizar.app.fragments.WebFragment;
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private static FragmentManager fm;
+    public static FragmentManager fm;
+    //private  static FragmentManager fm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,6 @@ public class MenuActivity extends AppCompatActivity
                 f = new CardFragment();
                 break;
             case R.id.nav_manage:
-                //b.putString(DefaultFragment.ARG_LAYOUT,"Manage");
                 f = new ManageStoriesFragment();
                 break;
             case R.id.nav_download:
