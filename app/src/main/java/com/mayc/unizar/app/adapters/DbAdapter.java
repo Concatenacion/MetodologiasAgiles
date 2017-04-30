@@ -188,5 +188,16 @@ public class DbAdapter extends SQLiteRelacional {
             mDb.execSQL("UPDATE "+DATABASA_CREATE_FINALES+" SET "+UltimaTarjeta+"="+id[i]+" WHERE "+Historia+"="+historia+ " AND "+Numero+"="+i );
         }
     }
+
+    public void removeHistoria(int historia){
+        if(!mDb.isOpen())
+            open();
+        mDb.execSQL("REMOVE "+DATABASA_CREATE_FINALES+" WHERE "+Historia+"="+historia);
+        mDb.execSQL("REMOVE "+DATABASE_CREATE_TARJETAS+" WHERE "+Historia+"="+historia);
+        mDb.execSQL("REMOVE "+DATABASE_CREATE_HISTORIAS+" WHERE "+Historia+"="+historia);
+
+
+
+    }
 }
 
