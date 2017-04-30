@@ -67,6 +67,7 @@ public class DbAdapter extends SQLiteRelacional {
 
             db.execSQL(DATABASE_CREATE_HISTORIAS);
             db.execSQL(DATABASE_CREATE_TARJETAS);
+            db.execSQL(DATABASA_CREATE_FINALES);
         }
 
         @Override
@@ -159,6 +160,33 @@ public class DbAdapter extends SQLiteRelacional {
         if(!mDb.isOpen())
             open();
         mDb.execSQL("UPDATE "+DATABASE_TABLE_HISTORIAS+" SET "+UltimaTarjeta+"="+id+" WHERE "+KEY_IDINFO+"="+Historia);
+    }
+
+    public void insertFinales(int id, int historia, int[] tarjetas){
+        if(!mDb.isOpen())
+            open();
+
+        for(int i=0; i<3; i++){
+            ContentValues initialValues = new ContentValues();
+            initialValues.put(KEY_IDINFO, id);
+            initialValues.put(Historia, historia);
+            initialValues.put(UltimaTarjeta, tarjetas[i]);
+            initialValues.put(Numero, i);
+            try {
+                mDb.insertOrThrow(DATABASA_CREATE_FINALES, null, initialValues);
+            } catch (SQLiteConstraintException e) {
+                Log.w(TAG, "insertUltimaTarjeta: "+e.getMessage() );
+            }
+        }
+
+    }
+
+    public void updateLastsCard(int historia, int[] id){
+        if(!mDb.isOpen())
+            open();
+        for(int i=0; i<3; i++){
+            mDb.execSQL("UPDATE "+DATABASA_CREATE_FINALES+" SET "+UltimaTarjeta+"="+id[i]+" WHERE "+Historia+"="+historia+ " AND "+Numero+"="+i );
+        }
     }
 }
 

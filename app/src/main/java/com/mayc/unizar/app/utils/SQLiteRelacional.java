@@ -5,6 +5,7 @@ public class SQLiteRelacional {
     public static final String DATABASE_NAME = "awesomoon";
     public static final String DATABASE_TABLE_HISTORIAS = "HISTORIAS";
     public static final String DATABASE_TABLE_TARJETAS = "TARJETAS";
+    public static final String DATABASE_TABLE_FINALES = "FINALES";
 
     public static final String KEY_IDINFO = "ID";
 
@@ -12,6 +13,8 @@ public class SQLiteRelacional {
     public static final String Genero="Genero";   //Género de una historia.
     public static final String UltimaTarjeta="UltimaTarjeta";
     public static final String Tiempo = "Tiempo";
+    public static final String Historia = "Historia";
+    public static final String Numero = "Numero";
 
 
     public static final String Nombre="Nombre"; //Nombre de una tarjeta
@@ -25,6 +28,15 @@ public class SQLiteRelacional {
 
 
     public static final int DATABASE_VERSION = 1;
+
+    protected static final String DATABASA_CREATE_FINALES=
+            "create table " + DATABASE_TABLE_FINALES + " ("
+                + KEY_IDINFO + " INTEGER PRIMARY KEY , "
+                + Historia + " INTEGER , "
+                + UltimaTarjeta + " INTEGER , "
+                + Numero + " INTEGER , "
+                + " FOREIGN KEY("+UltimaTarjeta+") REFERENCES "+DATABASE_TABLE_TARJETAS+"("+KEY_IDINFO+") "
+                + " FOREIGN KEY ("+HISTORIA+") REFERENCES "+DATABASE_TABLE_HISTORIAS+"("+KEY_IDINFO+"));";
 
 
 
