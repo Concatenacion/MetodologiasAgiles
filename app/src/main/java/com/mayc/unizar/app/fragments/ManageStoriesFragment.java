@@ -57,7 +57,7 @@ public class ManageStoriesFragment extends Fragment {
             List<HistoryInfo> feedList = Arrays.asList(factory.allHistories());
             Log.d("DEBUG", "Numero de historias: "+feedList.size());
             Log.d("DEBUG", "LoadMoreView.LOAD_VIEW_SET_COUNT " + Histories.LOAD_VIEW_SET_COUNT);
-            for (int i = 0; i < Histories.LOAD_VIEW_SET_COUNT && i < feedList.size() ; i++) {
+            for (int i = 0; i < Histories.LOAD_VIEW_SET_COUNT && i < (feedList.size() - 1) ; i++) {
                 mLoadMoreView.addView(new History(getActivity().getApplicationContext(), feedList.get(i)));
             }
             mLoadMoreView.setLoadMoreResolver(new Histories(mLoadMoreView, feedList));

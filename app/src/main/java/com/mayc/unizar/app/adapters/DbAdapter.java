@@ -192,6 +192,7 @@ public class DbAdapter extends SQLiteRelacional {
     public void removeHistoria(int historia){
         if(!mDb.isOpen())
             open();
+        mDb.setForeignKeyConstraintsEnabled (true);
         mDb.execSQL("REMOVE "+DATABASA_CREATE_FINALES+" WHERE "+Historia+"="+historia);
         mDb.execSQL("REMOVE "+DATABASE_CREATE_TARJETAS+" WHERE "+Historia+"="+historia);
         mDb.execSQL("REMOVE "+DATABASE_CREATE_HISTORIAS+" WHERE "+Historia+"="+historia);

@@ -2,9 +2,12 @@ package com.mayc.unizar.app.views;
 
 import android.app.Activity;
 
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -19,6 +22,7 @@ import com.mayc.unizar.app.MenuActivity;
 import com.mayc.unizar.app.R;
 import com.mayc.unizar.app.fragments.CardFragment;
 import com.mayc.unizar.app.fragments.DefaultFragment;
+import com.mayc.unizar.app.fragments.DeleteStoryDialogFragment;
 import com.mayc.unizar.app.types.HistoryInfo;
 import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
@@ -76,7 +80,11 @@ public class History {
 
     @LongClick(R.id.StoryCard)
     private void onLongClick(){
-        Log.d("DEBUG","Long button click");
-
+       // Bundle b = new Bundle();
+        // b.putInt(CardFragment.ARG_STORY_ID,mInfo.getID() );
+        // b.putString(DeleteStoryDialogFragment.ARG_STORY_NAME,mInfo.getTitle() );
+        // DeleteStoryDialogFragment dialogFragment = new DeleteStoryDialogFragment ();
+        //dialogFragment.setArguments( b );
+        //dialogFragment.show(MenuActivity.fm, "Borrar historia");
     }
 }
