@@ -31,6 +31,7 @@ import com.mindorks.placeholderview.annotations.NonReusable;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
 
+
 @NonReusable
 @Layout(R.layout.history_view)
 public class History {
@@ -80,11 +81,11 @@ public class History {
 
     @LongClick(R.id.StoryCard)
     private void onLongClick(){
-       // Bundle b = new Bundle();
-        // b.putInt(CardFragment.ARG_STORY_ID,mInfo.getID() );
-        // b.putString(DeleteStoryDialogFragment.ARG_STORY_NAME,mInfo.getTitle() );
-        // DeleteStoryDialogFragment dialogFragment = new DeleteStoryDialogFragment ();
-        //dialogFragment.setArguments( b );
-        //dialogFragment.show(MenuActivity.fm, "Borrar historia");
+        Bundle b = new Bundle();
+        b.putInt(CardFragment.ARG_STORY_ID,mInfo.getID() );
+        b.putString("STORY_NAME",mInfo.getTitle() );
+        DeleteStoryDialogFragment dialogFragment = new DeleteStoryDialogFragment ();
+       dialogFragment.setArguments( b );
+       dialogFragment.show(MenuActivity.fm, "Borrar historia");
     }
 }

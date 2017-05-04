@@ -11,6 +11,7 @@ import com.mayc.unizar.app.adapters.DbAdapter;
 import com.mayc.unizar.app.factories.ItemFactory;
 import com.mayc.unizar.app.factories.StoryFactory;
 import com.mayc.unizar.app.utils.JsonUtils;
+import com.mayc.unizar.app.utils.LoadMoreView;
 import com.mayc.unizar.app.views.Histories;
 import com.mayc.unizar.app.views.History;
 import com.mayc.unizar.app.types.HistoryInfo;
@@ -54,13 +55,16 @@ public class ManageStoriesFragment extends Fragment {
         else {
             factory = new StoryFactory(mDb);
             //List<HistoryInfo> feedList = JsonUtils.loadInfiniteFeeds(getActivity().getApplicationContext());
-            List<HistoryInfo> feedList = Arrays.asList(factory.allHistories());
-            Log.d("DEBUG", "Numero de historias: "+feedList.size());
+            List<HistoryInfo> histories= Arrays.asList( factory.allHistories() );
+            HistoryInfo[] feedList = factory.allHistories();
+
             Log.d("DEBUG", "LoadMoreView.LOAD_VIEW_SET_COUNT " + Histories.LOAD_VIEW_SET_COUNT);
-            for (int i = 0; i < Histories.LOAD_VIEW_SET_COUNT && i < (feedList.size() - 1) ; i++) {
-                mLoadMoreView.addView(new History(getActivity().getApplicationContext(), feedList.get(i)));
+            //for (int i = 0; i < Histories.LOAD_VIEW_SET_COUNT && i < feedList.length ; i++) {
+            for(int i = 0; i < LoadMoreView.LOAD_VIEW_SET_COUNT && i < histories.size(); i++){
+                Log.d("DEBUG", "Numero de historias: "+i);
+                mLoadMoreView.addView(new History(getActivity().getApplicationContext(), histories.get( i )));
             }
-            mLoadMoreView.setLoadMoreResolver(new Histories(mLoadMoreView, feedList));
+            mLoadMoreView.setLoadMoreResolver(new LoadMoreView(mLoadMoreView, histories));
         }
 
 
