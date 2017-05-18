@@ -51,7 +51,7 @@ public class MenuActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         Fragment f = new ManageStoriesFragment();
-        fm.beginTransaction().replace(R.id.default_fragment,f).commit();¡
+        fm.beginTransaction().replace(R.id.default_fragment,f).commit();
         drawer.closeDrawer(GravityCompat.START);
     }
 
@@ -82,10 +82,7 @@ public class MenuActivity extends AppCompatActivity
             case R.id.nav_download:
                 f = new WebFragment();
                 break;
-            case R.id.nav_send:
-                b.putString(DefaultFragment.ARG_LAYOUT,"Send");
-                break;
-        }
+            }
         f.setArguments(b);
         fm.beginTransaction().replace(R.id.default_fragment,f).commit();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

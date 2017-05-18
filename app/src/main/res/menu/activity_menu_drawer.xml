@@ -18,10 +18,6 @@
                 android:id="@+id/nav_download"
                 android:icon="@drawable/ic_cloud_download"
                 android:title="@string/download_new_stories" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
         </menu>
     </item>
 
