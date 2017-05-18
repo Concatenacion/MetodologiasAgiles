@@ -102,6 +102,12 @@ public class DbAdapter extends SQLiteRelacional {
         return DatabaseUtils.queryNumEntries(mDb,DATABASE_TABLE_HISTORIAS);
     }
 
+    public long countLastDecisions(){
+        if(!mDb.isOpen())
+            open();
+        return DatabaseUtils.queryNumEntries(mDb,DATABASE_TABLE_FINALES);
+    }
+
     public long countCards(){
         if(!mDb.isOpen())
             open();
@@ -149,6 +155,15 @@ public class DbAdapter extends SQLiteRelacional {
         return mDb.query(DATABASE_TABLE_TARJETAS, new String[]{"*"},HISTORIA+" = ?", new String[]{""+id},null,null,null);
     }
 
+    //return all finales of a story id
+    public Cursor returnAllFinalesId(int id) {
+        if(!mDb.isOpen())
+            open();
+          return mDb.query(DATABASE_TABLE_FINALES, new String[]{"*"},HISTORIA+" = ?", new String[]{""+id},null,null,null);
+          //return  mDb.rawQuery( "Select f."+Historia+" FROM "+DATABASE_TABLE_FINALES
+          //        +" f WHERE f."+Historia+"="+id+"  ORDER BY f.NUMERO ASC;" ,null);
+    }
+
 
     public Cursor returnTarjeta(int historia, int id){
         if(!mDb.isOpen())
@@ -162,18 +177,20 @@ public class DbAdapter extends SQLiteRelacional {
         mDb.execSQL("UPDATE "+DATABASE_TABLE_HISTORIAS+" SET "+UltimaTarjeta+"="+id+" WHERE "+KEY_IDINFO+"="+Historia);
     }
 
-    public void insertFinales(int id, int historia, int[] tarjetas){
+    public void insertFinales(int id, int historia, Integer[] tarjetas){
         if(!mDb.isOpen())
             open();
-
-        for(int i=0; i<3; i++){
+        removeFinales(historia);
+        //can be only one last card
+        for(int i=0; i<tarjetas.length; i++){
             ContentValues initialValues = new ContentValues();
-            initialValues.put(KEY_IDINFO, id);
+            initialValues.put(KEY_IDINFO, id+i);
             initialValues.put(Historia, historia);
             initialValues.put(UltimaTarjeta, tarjetas[i]);
             initialValues.put(Numero, i);
+            Log.d( "DEBUG" , "Inserting: "+i+"Historia :"+tarjetas[i] );
             try {
-                mDb.insertOrThrow(DATABASA_CREATE_FINALES, null, initialValues);
+                mDb.insertOrThrow(DATABASE_TABLE_FINALES, null, initialValues);
             } catch (SQLiteConstraintException e) {
                 Log.w(TAG, "insertUltimaTarjeta: "+e.getMessage() );
             }
@@ -202,9 +219,14 @@ public class DbAdapter extends SQLiteRelacional {
         //mDb.execSQL("REMOVE "+DATABASE_CREATE_HISTORIAS+" WHERE "+Historia+"="+historia);
         //mDb.execSQL("REMOVE "+DATABASA_CREATE_FINALES+" WHERE "+Historia+"="+historia);
         //mDb.execSQL("REMOVE "+DATABASE_CREATE_TARJETAS+" WHERE "+Historia+"="+historia);
+    }
 
-
-
+    public void removeFinales(int historia){
+        if(!mDb.isOpen())
+            open();
+        //mDb.execSQL("PRAGMA foreign_keys=ON;");
+        mDb.setForeignKeyConstraintsEnabled(false);
+        mDb.execSQL( "DELETE FROM "+DATABASE_TABLE_FINALES+" WHERE "+Historia+"="+historia );
     }
 }
 

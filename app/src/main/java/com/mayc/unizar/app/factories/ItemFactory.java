@@ -11,6 +11,7 @@ import com.mayc.unizar.app.types.Item;
 import static com.mayc.unizar.app.utils.SQLiteRelacional.Cuerpo;
 import static com.mayc.unizar.app.utils.SQLiteRelacional.Derecha;
 import static com.mayc.unizar.app.utils.SQLiteRelacional.Foto;
+import static com.mayc.unizar.app.utils.SQLiteRelacional.Historia;
 import static com.mayc.unizar.app.utils.SQLiteRelacional.Izquierda;
 import static com.mayc.unizar.app.utils.SQLiteRelacional.KEY_IDINFO;
 import static com.mayc.unizar.app.utils.SQLiteRelacional.Nombre;
@@ -50,6 +51,19 @@ public class ItemFactory {
        int i=0;
        do {
            list[i] = new Item(c.getInt(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getInt(5), c.getString(6), c.getInt(7));
+           i++;
+       } while(c.moveToNext());
+       return list;
+   }
+
+   public Item[] lastChoices(int historia){
+       Cursor c = db.returnAllFinalesId(historia);
+       Item [] list = new Item[c.getCount()];
+       c.moveToFirst();
+       int i=0;
+       do {
+           list[i] =  list[i] = getCard(c.getInt( c.getColumnIndex( "UltimaTarjeta" ) ),historia);
+           Log.d( "DEBUG","Last choices: "+list[i].getDescription() +"Tarjet id: "+String.valueOf( c.getInt( c.getColumnIndex( "UltimaTarjeta" ))) );
            i++;
        } while(c.moveToNext());
        return list;

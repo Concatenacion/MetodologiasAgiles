@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mayc.unizar.app.MenuActivity;
 import com.mayc.unizar.app.adapters.DbAdapter;
 import com.mayc.unizar.app.factories.ItemFactory;
 import com.mayc.unizar.app.utils.GameEngine;
@@ -33,6 +34,8 @@ public class CardFragment extends Fragment {
     private SwipePlaceHolderView mSwipeView;
     private ItemFactory factory;
     private Context mContext;
+    private GameEngine engine;
+    private DbAdapter mDb;
 
     private int storyID;
 
@@ -47,12 +50,13 @@ public class CardFragment extends Fragment {
         this.storyID=getArguments().getInt(ARG_STORY_ID,1);
         mSwipeView = (SwipePlaceHolderView) view.findViewById(R.id.swipeView);
         mContext = view.getContext();
-        DbAdapter mDb = new DbAdapter(view.getContext());
+        mDb = new DbAdapter(view.getContext());
         if(mDb.countHistories()==0){
             /*Insert Demo Story here */
             Log.d(TAG, "onCreateView: inserting demo story on database");
             JsonUtils.saveToDB(view.getContext(),"profiles.json");
         }
+
 
         mSwipeView.getBuilder()
                 .setDisplayViewCount(1)
@@ -62,7 +66,29 @@ public class CardFragment extends Fragment {
                         .setSwipeInMsgLayoutId(R.layout.card_msg_green_view)
                         .setSwipeOutMsgLayoutId(R.layout.card_msg_red_view));
         factory = new ItemFactory(mDb);
-        GameEngine engine = new GameEngine(mDb,view.getContext(),mSwipeView,this.storyID);
+        //check if exits save decisions
+        if(mDb.countLastDecisions()!=0){
+            //show dialog
+            //mDb.removeFinales( this.storyID );
+            Bundle b = new Bundle();
+            b.putInt(CardFragment.ARG_STORY_ID,this.storyID );
+            b.putString("STORY_NAME","No name");
+            b.putSerializable( "Choices" ,new ItemFactory(mDb).lastChoices( this.storyID ) );
+            ChoicesDialogFragment dialogFragment = new ChoicesDialogFragment ();
+            dialogFragment.setArguments( b );
+            dialogFragment.show( MenuActivity.fm, "Last choices");
+            //last chooice
+            engine = new GameEngine(mDb,view.getContext(),mSwipeView,this.storyID,true);
+        }else{
+            //from start
+            engine = new GameEngine(mDb,view.getContext(),mSwipeView,this.storyID);
+        }
+
+
+
+
+
+
         //mSwipeView.addView(new Card(view.getContext(),factory.getCard(1,1),mSwipeView));
 /*
         for(Item item : JsonUtils.loadProfiles(view.getContext())){
@@ -88,4 +114,14 @@ public class CardFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+       //remove  last choices from DB
+        mDb.removeFinales( this.storyID );
+        //save last histories into DB
+        mDb.insertFinales(1, this.storyID,this.engine.getLastCardsId() );
+        Log.d( "DEBUG", "Se han insertado las historias correctamente" );
+        mDb.close();
+        super.onDestroy();
+    }
 }
