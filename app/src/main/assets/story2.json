@@ -1,0 +1,58 @@
+[
+  {
+    "title":"A Demo Story",
+    "genre": "Narative"
+  },
+  {
+    "url":"http://alosound.com/wp-content/uploads/edd/2016/12/Dungeon-Level-360x203.png",
+    "name":"Dungeon",
+    "id":1,
+    "option1": "Run away!",
+    "nextOption1":2,
+    "option2": "Go ahead!",
+    "nextOption2":3,
+    "description":"You are near the entrance of a dungeon in the underwold"
+  },
+  {
+    "url":"http://www.pixelstalk.net/wp-content/uploads/2016/07/8-Bit-HD-Photo-620x517.jpg",
+    "name":"City",
+    "id":2,
+    "option1": "Take the road and go away",
+    "nextOption1":3,
+    "option2": "Go ahead!",
+    "nextOption2":4,
+    "description":"You see a city nearby..."
+  },
+  {
+    "url":"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR2tRXvegXoOWYQ8fPRxVn84piolQckUgVBF7yOuDtJo9k5r1Kd",
+    "name":"Library",
+    "id":3,
+    "option1": "Take a book",
+    "nextOption1":2,
+    "option2": "Go upstairs",
+    "nextOption2":3,
+    "description":"You find the library of the castle"
+
+  },
+  {
+    "url":"http://i.imgur.com/rw44jD3.png",
+    "name":"Cave",
+    "id":4,
+    "option1": "Go forward",
+    "nextOption1":5,
+    "option2": "Go backwards",
+    "nextOption2":2,
+    "description":"You are lost in a dark cave"
+
+  },
+  {
+    "url":"https://cdn.shutterstock.com/shutterstock/videos/22752961/thumb/7.jpg?i10c=img.resize(height:160)",
+    "name":"Game Over",
+    "id":5,
+    "option1":"",
+    "nextOption1":5,
+    "option2": "",
+    "nextOption2":5,
+    "description":"You win the demo story"
+  }
+]

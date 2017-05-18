@@ -23,7 +23,7 @@ public class WebFragment extends Fragment {
      * sección
      */
     public static final String ARG_LAYOUT = "Layout";
-    private static String URL = "http://www.guillermocebollero.es/app/";
+    private static String URL = "http://l100l.guillermocebollero.es";
 
     public WebFragment() {
     }
@@ -37,7 +37,7 @@ public class WebFragment extends Fragment {
 
         // instantiate it within the onCreate method
         mProgressDialog = new ProgressDialog(view.getContext());
-        mProgressDialog.setMessage("A message");
+        mProgressDialog.setMessage("Downloading...");
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         mProgressDialog.setCancelable(true);
@@ -59,8 +59,10 @@ public class WebFragment extends Fragment {
                         }
                     });
 
-                } else if (!url.equals(URL)) {
+                } else if (!url.startsWith(URL) && !url.contains("filter")) {
                     Toast.makeText(view.getContext(), "It seems to not be a valid story link.", Toast.LENGTH_LONG).show();
+                }else{
+                    return super.shouldOverrideUrlLoading(view, url);
                 }
                 return true;
             }
