@@ -50,6 +50,9 @@ public class MenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        Fragment f = new ManageStoriesFragment();
+        fm.beginTransaction().replace(R.id.default_fragment,f).commit();¡
+        drawer.closeDrawer(GravityCompat.START);
     }
 
     @Override
